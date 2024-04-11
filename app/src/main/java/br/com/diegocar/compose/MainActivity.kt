@@ -4,12 +4,15 @@
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
+import androidx.compose.foundation.*
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -17,7 +20,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.res.colorResource
@@ -52,34 +57,62 @@ import br.com.diegocar.compose.ui.theme.ComposeTheme
     @Composable
     fun MainScreen() {
         Column(
-            Modifier.background(Color.Red).fillMaxSize()
         ) {
-            Text(
-                text="Hello world",
-                maxLines = 3,
-                fontStyle = FontStyle.Italic,
-                style = TextStyle(
-                    fontSize =25.sp,
-                    shadow = Shadow(
-                        color = Color.White
-                    ),
-                    color = Color.Black
-                ),
-                modifier = Modifier.background(Color.Green ).fillMaxWidth()
+            DogCard(
+                dog = Dog("Luna",  "Chow Chow"),
+                modifier = Modifier.background(Color.Green)
             )
-            Text(
-                text="Outro qualquer coisa",
-                modifier = Modifier.background(Color.DarkGray ).fillMaxWidth()
+            DogCard(
+                dog = Dog("Orbs",  "Caramelo"),
+                modifier = Modifier.background(Color.Blue)
             )
-            Row{
-                Text(text = "Text 3", modifier = Modifier.padding(end = 30.dp))
-                Text(text = "Text 4")
+        }
+    }
+
+    data class Dog(
+        val name: String,
+        val breed: String,
+    )
+
+    @Composable
+    fun DogCard(
+        dog: Dog,
+        modifier: Modifier = Modifier
+    ){
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center,
+            modifier = Modifier.fillMaxWidth()
+        ){
+            Image(
+                painter = painterResource(id = R.drawable.ic_bus),
+                contentDescription = null,
+                modifier = Modifier
+                    .size(72.dp)
+                    .clip(CircleShape)
+            )
+
+            Column{
+                Text(text = dog.name)
+                Text(text = dog.breed)
             }
         }
+    }
 
 
 
-        /*
+
+
+
+
+
+
+
+
+
+
+    @Composable
+    private fun TestingButton() {
         Button(
             onClick = {},
             colors = ButtonDefaults.buttonColors(Color(0xFFFFEB3B))
@@ -89,12 +122,49 @@ import br.com.diegocar.compose.ui.theme.ComposeTheme
                 contentDescription = null,
                 tint = Color.Black
             )
-            Text(text = "Confirmar", color = Color.Black, style= MaterialTheme.typography.bodyLarge)
+            Text(
+                text = "Confirmar",
+                color = Color.Black,
+                style = MaterialTheme.typography.bodyLarge
+            )
         }
-        */
-
-
     }
+
+    @Composable
+    private fun TestingColumns() {
+        Column(
+            Modifier
+                .background(Color.Red)
+                .fillMaxSize()
+        ) {
+            Text(
+                text = "Hello world",
+                maxLines = 3,
+                fontStyle = FontStyle.Italic,
+                style = TextStyle(
+                    fontSize = 25.sp,
+                    shadow = Shadow(
+                        color = Color.White
+                    ),
+                    color = Color.Black
+                ),
+                modifier = Modifier
+                    .background(Color.Green)
+                    .fillMaxWidth()
+            )
+            Text(
+                text = "Outro qualquer coisa",
+                modifier = Modifier
+                    .background(Color.DarkGray)
+                    .fillMaxWidth()
+            )
+            Row {
+                Text(text = "Text 3", modifier = Modifier.padding(end = 30.dp))
+                Text(text = "Text 4")
+            }
+        }
+    }
+
     @Preview
     @Composable
     fun MainScreenPreview(){
