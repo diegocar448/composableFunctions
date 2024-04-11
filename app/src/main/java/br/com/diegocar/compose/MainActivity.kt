@@ -4,19 +4,34 @@
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import br.com.diegocar.compose.ui.theme.ComposeTheme
 
-class MainActivity : ComponentActivity() {
+
+
+    class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -26,7 +41,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    // Greeting("Android")
                     MainScreenPreview()
                 }
             }
@@ -36,18 +51,48 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun MainScreen() {
-        // Text(text="Texto com Compose")
-        // Text(text="qualquer coisa")
+        Column(
+            Modifier.background(Color.Red).fillMaxSize()
+        ) {
+            Text(
+                text="Hello world",
+                maxLines = 3,
+                fontStyle = FontStyle.Italic,
+                style = TextStyle(
+                    fontSize =25.sp,
+                    shadow = Shadow(
+                        color = Color.White
+                    ),
+                    color = Color.Black
+                ),
+                modifier = Modifier.background(Color.Green ).fillMaxWidth()
+            )
+            Text(
+                text="Outro qualquer coisa",
+                modifier = Modifier.background(Color.DarkGray ).fillMaxWidth()
+            )
+            Row{
+                Text(text = "Text 3", modifier = Modifier.padding(end = 30.dp))
+                Text(text = "Text 4")
+            }
+        }
 
+
+
+        /*
         Button(
             onClick = {},
+            colors = ButtonDefaults.buttonColors(Color(0xFFFFEB3B))
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_bus),
-                contentDescription = null // adicione uma descrição, se necessário
+                contentDescription = null,
+                tint = Color.Black
             )
-            Text(text = "Confirmar")
+            Text(text = "Confirmar", color = Color.Black, style= MaterialTheme.typography.bodyLarge)
         }
+        */
+
 
     }
     @Preview
